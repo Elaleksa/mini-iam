@@ -1,7 +1,7 @@
 package com.elaleksap.mini_iam.controller;
 
 import com.elaleksap.mini_iam.entity.User;
-import com.elaleksap.mini_iam.repository.UserRepository;
+import com.elaleksap.mini_iam.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,20 +10,19 @@ import java.util.List;
 @RequestMapping("/api/users")
 public class UserController {
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @PostMapping
     public User createUser(@RequestBody User user) {
-        user.setEnabled(true);
-        return userRepository.save(user);
+        return userService.createUser(user);
     }
 
     @GetMapping
     public List<User> getUsers() {
-        return userRepository.findAll();
+        return userService.getUsers();
     }
 }

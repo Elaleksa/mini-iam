@@ -8,24 +8,22 @@ import lombok.Setter;
 @Table(name = "users")
 @Getter
 @Setter
-
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, unique = true)
     private String username;
 
+    @Column(nullable = false, unique = true)
     private String email;
 
     private String firstName;
 
     private String lastName;
 
+    @Column(nullable = false)
     private Boolean enabled = true;
-
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
-    }
 }
