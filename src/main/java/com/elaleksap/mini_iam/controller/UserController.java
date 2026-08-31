@@ -1,8 +1,10 @@
 package com.elaleksap.mini_iam.controller;
 
-import com.elaleksap.mini_iam.entity.User;
+import com.elaleksap.mini_iam.dto.CreateUserRequest;
+import com.elaleksap.mini_iam.dto.UserResponse;
 import com.elaleksap.mini_iam.service.UserService;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -17,12 +19,17 @@ public class UserController {
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.createUser(user);
+    public UserResponse createUser(@Valid @RequestBody CreateUserRequest request) {
+        return userService.createUser(request);
     }
 
     @GetMapping
-    public List<User> getUsers() {
+    public List<UserResponse> getUsers() {
         return userService.getUsers();
+    }
+
+    @GetMapping("/{id}")
+    public UserResponse getUserById(@PathVariable Long id) {
+        return userService.getUserById(id);
     }
 }

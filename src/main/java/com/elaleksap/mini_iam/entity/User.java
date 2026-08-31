@@ -25,5 +25,8 @@ public class User {
     private String lastName;
 
     @Column(nullable = false)
+    private String passwordHash;
+
+    @Column(nullable = false)
     private Boolean enabled = true;
 }
